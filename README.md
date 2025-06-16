@@ -2,7 +2,10 @@
 ## 📌 Project Overview
 
 ### Frontend
-- Html
+- JSP (JavaServer Pages)
+- HTML, CSS
+- JSTL (Java Standard Tag Library)
+- Bootstrap (optional)
 
 ### Backend
 - Java with Spring Boot
@@ -10,3 +13,10 @@
 
 ### Database
 - MySQL
+
+### Dependencies
+- Spring Web
+- Spring Boot DevTools
+- Spring Data JPA
+- MySQL Driver
+- H2 Database
