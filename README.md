@@ -10,6 +10,7 @@
 ### Backend
 - Java with Spring Boot
 - Spring Data JPA
+- Spring MVC
 
 ### Database
 - MySQL
