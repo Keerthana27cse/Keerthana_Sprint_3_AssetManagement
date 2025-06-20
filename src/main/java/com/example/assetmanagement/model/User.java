@@ -1,26 +1,42 @@
 package com.example.assetmanagement.model;
 
+import com.example.assetmanagement.enums.UserRole;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
 public class User {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
-	private Long id; 
-	private String username; 
-	private String password; 
+	private Long id;
+	@NotBlank(message="UserName is required")
+	@Size(max = 50, message = "Username cannot exceed 50 characters")
+    @Column(nullable = false,unique=true)
+	private String username;
+	@NotBlank(message = "Password is required")
+    @Size(min = 6, message = "Password must be at least 6 characters")
+    @Column(nullable = false)
+	private String password;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    @Column(nullable = false, unique = true)
 	private String email; 
-	@Enumerated(EnumType.STRING) 
+    @NotNull(message = "User role must be selected")
+    @Enumerated(EnumType.STRING)
 	private UserRole userrole;
-	public Long getId() {
-		return id;
-	}
+	
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -33,7 +49,9 @@ public class User {
 		this.email = email;
 		this.userrole = userrole;
 	}
-	
+	public Long getId() {
+		return id;
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -55,12 +73,13 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public UserRole getRole() {
+	public UserRole getUserrole() {
 		return userrole;
 	}
-	public void setRole(UserRole userrole) {
+	public void setUserrole(UserRole userrole) {
 		this.userrole = userrole;
 	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role="

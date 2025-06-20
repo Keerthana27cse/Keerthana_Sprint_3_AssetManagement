@@ -2,6 +2,7 @@ package com.example.assetmanagement.model;
 
 import java.time.LocalDate;
 
+import com.example.assetmanagement.enums.RequestStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,7 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
-@Entity 
+@Entity(name = "new_asset_request")
 public class NewAssetRequest { 
 @Id 
 @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,7 +23,7 @@ private Employee employee;
 private AssetCategory requestedCategory; 
 private String description; 
 @Enumerated(EnumType.STRING) 
-private RequestStatus status; 
+private RequestStatus status =RequestStatus.PENDING;; 
 private LocalDate requestDate;
 public NewAssetRequest() {
 	super();

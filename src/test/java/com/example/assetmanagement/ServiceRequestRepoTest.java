@@ -1,8 +1,10 @@
 package com.example.assetmanagement;
 
-import com.example.assetmanagement.model.ServiceRequest;
-import com.example.assetmanagement.repository.ServiceRequestRepo;
-import com.example.assetmanagement.model.RequestStatus;
+import com.example.assetmanagement.enums.IssueType;
+import com.example.assetmanagement.enums.RequestStatus;
+import com.example.assetmanagement.model.*;
+import com.example.assetmanagement.repository.*;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,17 +17,41 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ServiceRequestRepoTest {
 
     @Autowired
-    private ServiceRequestRepo repo;
+    private ServiceRequestRepo serviceRequestRepo;
+
+    @Autowired
+    private EmployeeRepo employeeRepo;
+
+    @Autowired
+    private AssetRepo assetRepo;
 
     @Test
-    void testSaveServiceRequest() {
-        ServiceRequest request = new ServiceRequest();
-        request.setRequestDate(LocalDate.now());
-        request.setStatus(RequestStatus.VERIFIED);
+    public void testCreateServiceRequest() {
+        // Fetch existing employee and asset (assumed to exist in DB)
+        Long employeeId = 1L;
+        Long assetId = 1L;
 
-        ServiceRequest saved = repo.save(request);
+        Employee employee = employeeRepo.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
 
-        assertNotNull(saved.getId());
-        assertEquals(RequestStatus.VERIFIED,saved.getStatus());
+        Asset asset = assetRepo.findById(assetId)
+                .orElseThrow(() -> new RuntimeException("Asset not found"));
+
+        // Create service request
+        ServiceRequest serviceRequest = new ServiceRequest();
+        serviceRequest.setEmployee(employee);
+        serviceRequest.setAsset(asset);
+        serviceRequest.setIssueType(IssueType.SOFTWARE); // or HARDWARE based on your enum
+        serviceRequest.setDescription("System freezing frequently");
+        serviceRequest.setStatus(RequestStatus.PENDING);
+        serviceRequest.setRequestDate(LocalDate.now());
+
+        ServiceRequest savedRequest = serviceRequestRepo.save(serviceRequest);
+
+        // Assertions
+        assertNotNull(savedRequest.getId());
+        assertEquals(employeeId, savedRequest.getEmployee().getId());
+        assertEquals(assetId, savedRequest.getAsset().getId());
+        assertEquals(RequestStatus.PENDING, savedRequest.getStatus());
     }
 }

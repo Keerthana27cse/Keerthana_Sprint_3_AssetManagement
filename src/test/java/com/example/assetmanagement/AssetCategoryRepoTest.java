@@ -1,5 +1,11 @@
 package com.example.assetmanagement;
 
+
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Optional;
+
 import com.example.assetmanagement.model.AssetCategory;
 import com.example.assetmanagement.repository.AssetCategoryRepo;
 
@@ -7,22 +13,22 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 public class AssetCategoryRepoTest {
 
     @Autowired
-    private AssetCategoryRepo repo;
+    private AssetCategoryRepo categoryRepo;
 
     @Test
-    void testSaveAndFind() {
+    public void testSaveAndFindByCategoryName() {
         AssetCategory category = new AssetCategory();
-        category.setCategoryName("Electronics");
+        category.setCategoryName("Furniture");
+        
+        AssetCategory saved = categoryRepo.save(category);
+        assertThat(saved.getId()).isNotNull();
 
-        AssetCategory saved = repo.save(category);
-
-        assertNotNull(saved.getId());
-        assertEquals("Electronics", saved.getCategoryName());
+        Optional<AssetCategory> found = categoryRepo.findByCategoryName("Furniture");
+        assertThat(found).isPresent();
+        assertThat(found.get().getCategoryName()).isEqualTo("Furniture");
     }
 }

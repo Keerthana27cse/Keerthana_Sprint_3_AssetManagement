@@ -1,4 +1,4 @@
-package com.example.assetmanagement.model;
+package com.example.assetmanagement.enums;
 
 
 public enum RequestStatus{
@@ -7,5 +7,4 @@ public enum RequestStatus{
     REJECTED,
     RESOLVED,
     VERIFIED
-	
 }

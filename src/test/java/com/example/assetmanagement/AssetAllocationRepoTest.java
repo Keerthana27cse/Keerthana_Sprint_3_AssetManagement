@@ -1,14 +1,13 @@
 package com.example.assetmanagement;
 
+import com.example.assetmanagement.enums.AssetStatus;
+import com.example.assetmanagement.enums.RequestStatus;
 import com.example.assetmanagement.model.Asset;
 import com.example.assetmanagement.model.AssetAllocation;
-import com.example.assetmanagement.model.AssetStatus;
-import com.example.assetmanagement.model.Employee;
-import com.example.assetmanagement.model.UserRole;
+import com.example.assetmanagement.model.NewAssetRequest;
 import com.example.assetmanagement.repository.AssetAllocationRepo;
 import com.example.assetmanagement.repository.AssetRepo;
-import com.example.assetmanagement.repository.EmployeeRepo;
-
+import com.example.assetmanagement.repository.NewAssetRequestRepo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,55 +20,47 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 public class AssetAllocationRepoTest {
 
-    @Autowired
-    private AssetAllocationRepo assetAllocationRepo;
+	@Autowired
+    private NewAssetRequestRepo newAssetRequestRepo;
 
     @Autowired
     private AssetRepo assetRepo;
 
+    
     @Autowired
-    private EmployeeRepo employeeRepo;
+    private AssetAllocationRepo assetAllocationRepo;
 
     @Test
-    public void testSaveAndFindAssetAllocation() {
-        
-    	Asset asset = new Asset();
-        asset.setAssetNo("A001");
-        asset.setAssetName("Laptop");
-        asset.setAssetModel("Dell XPS");
-        asset.setManufacturingDate(LocalDate.of(2023, 1, 1));
-        asset.setExpiryDate(LocalDate.of(2028, 1, 1));
-        asset.setAssetStatus(AssetStatus.valueOf("WORKING"));
-        asset.setAssetValue(100000.0);
-        asset = assetRepo.save(asset);
+    public void testAllocateAssetForRequest() {
+        // 1. Fetch NewAssetRequest by id
+        Long requestId = 4L;
+        NewAssetRequest request = newAssetRequestRepo.findById(requestId).orElseThrow();
 
-        Employee emp = new Employee();
-        emp.setName("John Doe");
-        emp.setEmail("john@example.com");
-        emp.setPassword("test123");
-        emp.setRole(UserRole.valueOf("EMPLOYEE"));
-        emp.setContactNumber("1234567890");
-        emp = employeeRepo.save(emp);
+        // 2. Get requested category id
+        Long categoryId = request.getRequestedCategory().getId();
 
+        // 3. Find an available asset in that category with status WORKING
+        Asset asset = assetRepo.findFirstByCategory_IdAndAssetStatus(categoryId, AssetStatus.WORKING)
+                .orElseThrow(() -> new RuntimeException("No available asset found"));
+
+
+        // 4. Create asset allocation
         AssetAllocation allocation = new AssetAllocation();
         allocation.setAsset(asset);
-        allocation.setEmployee(emp);
+        allocation.setEmployee(request.getEmployee());
         allocation.setAllocationDate(LocalDate.now());
-        allocation.setReturnDate(LocalDate.now().plusDays(30));
+        allocation.setReturnDate(null);
 
-        AssetAllocation saved = assetAllocationRepo.save(allocation);
-        assertNotNull(saved.getId());
+        AssetAllocation savedAllocation = assetAllocationRepo.save(allocation);
 
-        AssetAllocation found = assetAllocationRepo.findById(saved.getId()).orElse(null);
-        assertNotNull(found);
-        assertEquals(emp.getEmail(), found.getEmployee().getEmail());
-        assertEquals(asset.getAssetNo(), found.getAsset().getAssetNo());
+        // 5. Optionally update request status
+        request.setStatus(RequestStatus.APPROVED);
+        newAssetRequestRepo.save(request);
+
+        // Assertions
+        assertNotNull(savedAllocation.getId());
+        assertEquals(request.getEmployee().getId(), savedAllocation.getEmployee().getId());
+        assertEquals(asset.getId(), savedAllocation.getAsset().getId());
+        assertEquals(RequestStatus.APPROVED, request.getStatus());
     }
 }
-
-    /*@AfterEach
-    public void cleanup() {
-        assetAllocationRepo.deleteAll();
-        assetRepo.deleteAll();
-        employeeRepo.deleteAll();*/
-

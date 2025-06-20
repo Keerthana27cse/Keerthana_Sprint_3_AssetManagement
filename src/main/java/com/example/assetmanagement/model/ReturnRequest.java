@@ -2,6 +2,8 @@ package com.example.assetmanagement.model;
 
 import java.time.LocalDate;
 
+import com.example.assetmanagement.enums.RequestStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

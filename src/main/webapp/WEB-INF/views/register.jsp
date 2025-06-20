@@ -1,77 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="head.jsp"%>
-<meta charset="UTF-8">
+    <%@ include file="head.jsp" %>
+    <meta charset="UTF-8">
+    <title>Register | Asset Management</title>
 </head>
 <body>
-<%@ include file="navbar.jsp"%>
-<div class="container">
+<%@ include file="login-navbar.jsp" %>
 
-<div class="row">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h3 class="mb-4 text-center">Register</h3>
+            <form action="/user/register" method="post" class="border p-4 rounded shadow">
+                <div class="mb-3">
+                    <label class="form-label">User Role</label>
+                    <select class="form-select" name="userrole" required>
+                        <option value="">Select Role</option>
+                        <option value="EMPLOYEE">Employee</option>
+                    </select>
+                </div>
 
-<div class="col -sm-6 text-center">
-</div>
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" placeholder="Username" required>
+                </div>
 
-<div class="col-sm-6">
-<h3 class="mb-4">Register</h3>
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="Full Name" required>
+                </div>
 
-<form action ="/user/register" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Gender</label>
+                    <select class="form-select" name="gender" required>
+                        <option value="">Select Option</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FEMALE">FEMALE</option>
+                        <option value="OTHER">OTHER</option>
+                    </select>
+                </div>
 
-<div class="mb-3">
-            <select class="form-control" name="userrole" required>
-                <option value="">Select Role</option>
-                <option value="EMPLOYEE">Employee</option>
-            </select>
+                <div class="mb-3">
+                    <label class="form-label">Contact Number</label>
+                    <input type="tel" class="form-control" name="contactNumber" placeholder="Contact No" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Address</label>
+                    <textarea class="form-control" name="address" placeholder="Address" rows="3" required></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="Email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" placeholder="Password" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success me-2">Register</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
         </div>
-
-
-<div class="mb-3">
-<input type="text" class="form-control"name="name" placeholder="Full Name"
-required>
-</div>
-
-<div class ="mb-3" >
-<select class="form-control" name="gender" required>
-<option value="MALE">MALE</option>
-<option value="FEMALE">FEMALE</option>
-<option value="OTHER">OTHER</option>
-</select></div>
-
-<div class="mb-3">
-<input type="tel" class="form-control"name="contactNumber" placeholder="ContactNo"
-required>
-</div>
-
-<div class="mb-3">
-<textArea class="form-control"name="address" placeholder="Address"
-required></textArea>
-</div>
-
-<div class="mb-3">
-<input type="email" class="form-control"name="email" placeholder="Email"
-required>
-</div>
-
-
-
-<div class="mb-3">
-<input type="password" class="form-control" name="password" placeholder="Password" required>
-</div>
-
-
-<div class="mb-3">
- <button type="submit" class="btn btn-primary">Registered</button>
- <button type="reset" class="btn btn-danger" >Reset</button>
-</div>
-
-
-
-</form>
-</div>
-</div>
+    </div>
 </div>
 </body>
 </html>

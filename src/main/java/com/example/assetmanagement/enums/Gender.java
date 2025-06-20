@@ -1,4 +1,4 @@
-package com.example.assetmanagement.model;
+package com.example.assetmanagement.enums;
 
 public enum Gender {
 

@@ -1,33 +1,71 @@
 package com.example.assetmanagement;
 
+
 import com.example.assetmanagement.model.ReturnRequest;
+import com.example.assetmanagement.model.Employee;
+import com.example.assetmanagement.enums.RequestStatus;
+import com.example.assetmanagement.model.Asset;
+import com.example.assetmanagement.repository.AssetRepo;
+import com.example.assetmanagement.repository.EmployeeRepo;
 import com.example.assetmanagement.repository.ReturnRequestRepo;
-import com.example.assetmanagement.model.RequestStatus;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
 public class ReturnRequestRepoTest {
 
     @Autowired
-    private ReturnRequestRepo repo;
+    private ReturnRequestRepo returnRequestRepo;
+
+    @Autowired
+    private EmployeeRepo employeeRepo;
+
+    @Autowired
+    private AssetRepo assetRepo;
 
     @Test
-    void testSaveReturnRequest() {
-        ReturnRequest returnRequest = new ReturnRequest();
-        returnRequest.setRequestDate(LocalDate.now());
-        returnRequest.setStatus(RequestStatus.APPROVED);
+    public void testCreateReturnRequest() {
+        Long employeeId = 1L;
+        Long assetId = 1L; // change to allocated asset ID
 
-        ReturnRequest saved = repo.save(returnRequest);
+        Employee employee = employeeRepo.findById(employeeId).orElseThrow();
+        Asset asset = assetRepo.findById(assetId).orElseThrow();
+
+        ReturnRequest request = new ReturnRequest();
+        request.setEmployee(employee);
+        request.setAsset(asset);
+        request.setReason("Returning after testing");
+        request.setStatus(RequestStatus.PENDING); // or directly APPROVED, depending on business logic
+        request.setRequestDate(LocalDate.now());
+
+        ReturnRequest saved = returnRequestRepo.save(request);
 
         assertNotNull(saved.getId());
-        assertEquals(RequestStatus.APPROVED, saved.getStatus());
+        assertEquals(RequestStatus.PENDING, saved.getStatus());
     }
+    @Test
+    public void testUpdateReturnRequestStatus() {
+        Long requestId = 1L;
+        
+        // 1. Fetch the return request
+        ReturnRequest returnRequest = returnRequestRepo.findById(requestId)
+            .orElseThrow();
+
+        // 2. Change status to APPROVED
+        returnRequest.setStatus(RequestStatus.APPROVED);
+
+        // 3. Save updated request
+        returnRequestRepo.save(returnRequest);
+
+        // 4. Assertions
+        ReturnRequest updated = returnRequestRepo.findById(requestId).orElseThrow();
+        assertEquals(RequestStatus.APPROVED, updated.getStatus());
+    }
+
 }

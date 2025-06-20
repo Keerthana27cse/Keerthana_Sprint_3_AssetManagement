@@ -1,4 +1,4 @@
-package com.example.assetmanagement.model;
+package com.example.assetmanagement.enums;
 
 public enum AssetStatus {
 	    AVAILABLE,
@@ -7,6 +7,7 @@ public enum AssetStatus {
 	    RETURNED,
 	    DISCARDED,
 	    IN_USE, DAMAGED,
+	    IN_MAINTENANCE,
 	    WORKING
 	    
 }

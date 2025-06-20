@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.assetmanagement.enums.AssetStatus;
+import com.example.assetmanagement.enums.RequestStatus;
 import com.example.assetmanagement.model.Asset;
 import com.example.assetmanagement.model.AssetAudit;
-import com.example.assetmanagement.model.AssetStatus;
 import com.example.assetmanagement.model.Employee;
-import com.example.assetmanagement.model.RequestStatus;
 import com.example.assetmanagement.repository.AssetAuditRepo;
 import com.example.assetmanagement.repository.AssetRepo;
 import com.example.assetmanagement.repository.EmployeeRepo;

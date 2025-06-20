@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="head.jsp" %>
 </head>
 <body>
-<h1>Hiii</h1>
+<%@ include file="admin-navbar.jsp" %>
 </body>
 </html>
