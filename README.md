@@ -1,4 +1,4 @@
-# Keerthana_Sprint_2_AssetManagement
+# Keerthana_Sprint_3_AssetManagement
 ## 📌 Project Overview
 
 ### Frontend
