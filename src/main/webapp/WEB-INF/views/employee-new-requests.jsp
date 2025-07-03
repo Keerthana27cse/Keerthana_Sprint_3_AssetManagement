@@ -1,6 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
-<head><title>My New Asset Requests</title></head>
+<head>
+<meta charset="UTF-8">
+<title>My New Asset Requests</title></head>
 <body>
     <h2>New Asset Requests by ${employee.name}</h2>
     <table border="1">
@@ -10,6 +12,7 @@
             <th>Description</th>
             <th>Status</th>
             <th>Request Date</th>
+            
         </tr>
         <c:forEach var="req" items="${requests}">
             <tr>

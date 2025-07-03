@@ -1,10 +1,10 @@
 package com.example.assetmanagement;
 
 
-import com.example.assetmanagement.model.ReturnRequest;
-import com.example.assetmanagement.model.Employee;
+import com.example.assetmanagement.entity.Asset;
+import com.example.assetmanagement.entity.Employee;
+import com.example.assetmanagement.entity.ReturnRequest;
 import com.example.assetmanagement.enums.RequestStatus;
-import com.example.assetmanagement.model.Asset;
 import com.example.assetmanagement.repository.AssetRepo;
 import com.example.assetmanagement.repository.EmployeeRepo;
 import com.example.assetmanagement.repository.ReturnRequestRepo;

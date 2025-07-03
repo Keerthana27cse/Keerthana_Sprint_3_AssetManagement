@@ -51,7 +51,7 @@
                         <td>${emp.password}</td>
                         <td>${emp.gender}</td>
                         <td>${emp.empstatus}</td>  
-                        <td>${emp.createdAt}</td  >                      
+<td><fmt:formatDate value="${emp.createdAt}" pattern="dd-MM-yyyy HH:mm" /></td>
                                             
                                               
                         <td>
@@ -60,7 +60,6 @@
                             
                             <a href="/admin/delete?id=${emp.id}" class="btn btn-sm btn-danger"
                                onclick="return confirm('Are you sure you want to delete this employee?');"> Delete </a>
-                           
                         </td>
                     </tr>
                 </c:forEach>

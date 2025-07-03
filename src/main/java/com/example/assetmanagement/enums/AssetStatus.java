@@ -8,6 +8,5 @@ public enum AssetStatus {
 	    DISCARDED,
 	    IN_USE, DAMAGED,
 	    IN_MAINTENANCE,
-	    WORKING
-	    
+	    WORKING    
 }

@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
 
-import com.example.assetmanagement.model.AssetCategory;
+import com.example.assetmanagement.entity.AssetCategory;
 import com.example.assetmanagement.repository.AssetCategoryRepo;
 
 import org.junit.jupiter.api.Test;

@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.assetmanagement.entity.Employee;
 import com.example.assetmanagement.enums.Gender;
 import com.example.assetmanagement.enums.UserRole;
-import com.example.assetmanagement.model.Employee;
 import com.example.assetmanagement.repository.EmployeeRepo;
 
 

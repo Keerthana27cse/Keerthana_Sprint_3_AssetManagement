@@ -41,6 +41,17 @@
                     <label>Address:</label>
                     <textarea name="address" class="form-control">${updateUser.address}</textarea>
                 </div>
+                
+				 <div class="mb-3">
+				    <label>Status:</label><br>
+				    <input type="radio" name="empstatus" value="ACTIVE"
+				        <c:if test="${updateUser.empstatus eq 'ACTIVE'}">checked</c:if>> Active
+				
+				    <input type="radio" name="empstatus" value="INACTIVE"
+				        <c:if test="${updateUser.empstatus eq 'INACTIVE'}">checked</c:if>> Inactive
+				</div>
+				               
+                
 
                 <div class="mb-3">
                     <label>Gender:</label><br>

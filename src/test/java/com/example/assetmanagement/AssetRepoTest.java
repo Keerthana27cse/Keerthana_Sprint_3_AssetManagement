@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.assetmanagement.entity.Asset;
+import com.example.assetmanagement.entity.AssetCategory;
 import com.example.assetmanagement.enums.AssetStatus;
-import com.example.assetmanagement.model.Asset;
-import com.example.assetmanagement.model.AssetCategory;
 import com.example.assetmanagement.repository.AssetCategoryRepo;
 import com.example.assetmanagement.repository.AssetRepo;
 

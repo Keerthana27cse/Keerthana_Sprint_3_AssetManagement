@@ -1,8 +1,8 @@
 package com.example.assetmanagement;
 
+import com.example.assetmanagement.entity.*;
 import com.example.assetmanagement.enums.IssueType;
 import com.example.assetmanagement.enums.RequestStatus;
-import com.example.assetmanagement.model.*;
 import com.example.assetmanagement.repository.*;
 
 import org.junit.jupiter.api.Test;

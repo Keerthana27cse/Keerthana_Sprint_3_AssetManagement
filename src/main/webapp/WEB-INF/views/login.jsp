@@ -17,7 +17,7 @@
           <form action="/user/logincheck" method="post" class="border p-4 rounded shadow">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" name="email"  value=" ${emp.email}"required />
+                    <input type="email" class="form-control" name="email"  value="${emp.email}"required />
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
@@ -26,14 +26,6 @@
                 <div class="mb-3">
                     <label for="username" class="form-label">UserName</label>
                     <input type="text" class="form-control" name="username" value=" ${emp.username}"required />
-                </div>
-                <div class="mb-3">
-                    <label for="userrole" class="form-label">Select Role</label>
-                <select class="form-select" name="userrole" required>
-                    <option value="">Select Role</option>
-                    <option value="EMPLOYEE" selected>Employee</option>
-                </select>
-                                    
                 </div>
                 <div class="text-center mb-3">
                     <button type="submit" class="btn btn-primary me-2">Sign In</button>

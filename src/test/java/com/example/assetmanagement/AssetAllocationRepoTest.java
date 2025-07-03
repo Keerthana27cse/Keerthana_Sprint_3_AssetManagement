@@ -1,10 +1,10 @@
 package com.example.assetmanagement;
 
+import com.example.assetmanagement.entity.Asset;
+import com.example.assetmanagement.entity.AssetAllocation;
+import com.example.assetmanagement.entity.NewAssetRequest;
 import com.example.assetmanagement.enums.AssetStatus;
 import com.example.assetmanagement.enums.RequestStatus;
-import com.example.assetmanagement.model.Asset;
-import com.example.assetmanagement.model.AssetAllocation;
-import com.example.assetmanagement.model.NewAssetRequest;
 import com.example.assetmanagement.repository.AssetAllocationRepo;
 import com.example.assetmanagement.repository.AssetRepo;
 import com.example.assetmanagement.repository.NewAssetRequestRepo;

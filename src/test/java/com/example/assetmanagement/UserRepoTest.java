@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.assetmanagement.entity.User;
 import com.example.assetmanagement.enums.UserRole;
-import com.example.assetmanagement.model.User;
 import com.example.assetmanagement.repository.UserRepo;
 
 

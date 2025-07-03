@@ -22,7 +22,7 @@
             </c:choose>
         </div>
         <div class="card-body">
-            <form action="/admin/saveAsset" method="post">
+            <form action="/admin/saveAsset" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="${asset.id}" />
 
                 <div class="mb-3">
@@ -34,11 +34,27 @@
                     <label class="form-label">Asset Name</label>
                     <input type="text" name="assetName" class="form-control" value="${asset.assetName}" required>
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">Asset Image</label>
+                    <input type="file" name="imageFile" class="form-control" accept="image/*">
+                </div>
 
                 <div class="mb-3">
                     <label class="form-label">Asset Model</label>
                     <input type="text" name="assetModel" class="form-control" value="${asset.assetModel}">
                 </div>
+				  <div class="mb-3">
+				    <label class="form-label">Asset Description</label>
+				    <textarea name="description" class="form-control" rows="3" placeholder="Enter asset description">${asset.description}</textarea>
+				</div>
+				
+					<c:if test="${not empty asset.imageUrl}">
+					    <div class="mb-3">
+					        <label>Current Image:</label><br>
+					        <img src="${asset.imageUrl}" alt="Asset Image" style="max-width: 200px; border: 1px solid #ccc; padding: 4px;" />
+					    </div>
+					</c:if>
+									
 
                 <div class="mb-3">
                     <label class="form-label">Manufacturing Date</label>
@@ -95,7 +111,7 @@
             </form>
         </div>
     </div>
-    <form action="/admin/filterAssets" method="get" class="mb-3">
+  <form action="/admin/filterAssets" method="get" class="mb-3">
   <div class="row g-2 align-items-center">
     <div class="col-md-3">
       <select name="categoryId" class="form-select" onchange="this.form.submit()">
@@ -109,22 +125,24 @@
     </div>
   </div>
 </form>
-
 <div class="table-responsive">
-    <table class="table table-bordered table-striped text-center align-middle">
+    <table class="table table-striped table-hover table-bordered align-middle text-center">
         <thead class="table-dark">
-            <tr>
+            <tr class="align-middle">
                 <th>ID</th>
                 <th>Asset No</th>
                 <th>Asset Name</th>
+                <th>Image</th>
                 <th>Model</th>
+                <th style="width: 180px;">Description</th>
                 <th>Manufactured</th>
                 <th>Expiry</th>
-                <th>Value</th>
+                <th>Value (₹)</th>
                 <th>Status</th>
                 <th>Category</th>
-                <th>CreatedAt</th>
-                <th></th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -133,22 +151,37 @@
                     <td>${asset.id}</td>
                     <td>${asset.assetNo}</td>
                     <td>${asset.assetName}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty asset.imageUrl}">
+                                <img src="${asset.imageUrl}" alt="Image" class="img-thumbnail" style="max-height: 60px;">
+                            </c:when>
+                            <c:otherwise>
+                                <span class="text-muted">No Image</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>${asset.assetModel}</td>
+                    <td style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${asset.description}">
+                        ${asset.description}
+                    </td>
                     <td>${asset.manufacturingDate}</td>
                     <td>${asset.expiryDate}</td>
                     <td>${asset.assetValue}</td>
                     <td>${asset.assetStatus}</td>
                     <td>${asset.category.categoryName}</td>
                     <td>${asset.createdAt}</td>
+                    <td>${asset.updatedAt}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/admin/editAsset?id=${asset.id}" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="${pageContext.request.contextPath}/admin/deleteAsset?id=${asset.id}" class="btn btn-sm btn-danger" onclick="return confirm('Delete this asset?');">Delete</a>
+                        <a href="/admin/editAsset?id=${asset.id}" class="btn btn-sm btn-outline-warning mb-1">Edit</a>
+                        <a href="/admin/deleteAsset?id=${asset.id}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this asset?');">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
+
             <c:if test="${empty assets}">
                 <tr>
-                   <td colspan="11" class="text-muted text-center">No assets found.</td>
+                    <td colspan="14" class="text-muted text-center">No assets found.</td>
                 </tr>
             </c:if>
         </tbody>
@@ -156,3 +189,5 @@
 </div>
 </body>
 </html>
+             
+       

@@ -15,14 +15,7 @@
         <div class="col-md-8">
             <h3 class="mb-4 text-center">Register</h3>
             <form action="/user/register" method="post" class="border p-4 rounded shadow">
-                <div class="mb-3">
-                    <label class="form-label">User Role</label>
-                    <select class="form-select" name="userrole" required>
-                        <option value="">Select Role</option>
-                        <option value="EMPLOYEE">Employee</option>
-                    </select>
-                </div>
-
+                
                 <div class="mb-3">
                     <label class="form-label">Username</label>
                     <input type="text" class="form-control" name="username" placeholder="Username" required>

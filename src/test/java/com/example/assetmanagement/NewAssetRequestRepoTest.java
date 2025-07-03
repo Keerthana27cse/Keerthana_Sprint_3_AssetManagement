@@ -1,8 +1,8 @@
 package com.example.assetmanagement;
+import com.example.assetmanagement.entity.AssetCategory;
+import com.example.assetmanagement.entity.Employee;
+import com.example.assetmanagement.entity.NewAssetRequest;
 import com.example.assetmanagement.enums.RequestStatus;
-import com.example.assetmanagement.model.AssetCategory;
-import com.example.assetmanagement.model.Employee;
-import com.example.assetmanagement.model.NewAssetRequest;
 import com.example.assetmanagement.repository.AssetCategoryRepo;
 import com.example.assetmanagement.repository.EmployeeRepo;
 import com.example.assetmanagement.repository.NewAssetRequestRepo;
